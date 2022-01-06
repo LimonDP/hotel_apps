@@ -30,7 +30,7 @@ void main() {
         initialRoute: '/',
         routes: {
           '/': (context) => MyApp(),
-          '/signup': (context) => const SignUpMainPage(),
+          '/sign-up': (context) => const SignUpMainPage(),
           '/log-in': (context) => const SignIn(),
           '/details': (context) => const DetailsMainPage(),
           '/selected': (context) => const Selected(),

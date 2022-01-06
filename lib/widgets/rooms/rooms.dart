@@ -16,7 +16,7 @@ class _RoomsState extends State<Rooms> {
 
   @override
   Widget build(BuildContext context) {
-    final _allRoom = Provider.of<RoomProvider>(context).selectedRoom;
+    final _allRoom = Provider.of<RoomProvider>(context).roomList;
     final _allbed = Provider.of<RoomProvider>(context).bedList;
     print(_allRoom.length);
     return Scaffold(

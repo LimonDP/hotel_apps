@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:hotel_app/data/signup.dart';
 import 'package:hotel_app/data/user_provider.dart';
@@ -34,7 +36,7 @@ class _SignInState extends State<SignIn> {
     for (var item in signinProvider) {
       if (item.userEmail == _signin.userEmail &&
           item.password == _signin.password) {
-        Navigator.of(context).pushNamed('/');
+        Navigator.of(context).pushNamed('/home');
       } else {
         AlertDialog alertDialog = AlertDialog(
           backgroundColor: Colors.grey.shade300,
@@ -91,151 +93,180 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 350,
-                height: 320,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage('assets/images/sign.png'),
+            ),
+          ),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 350,
+                    height: 320,
 
-                decoration: BoxDecoration(
-                  color: Color(0xFFffd394),
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                padding: EdgeInsets.all(16.0),
-                //alignment: Alignment.center,
-                child: Form(
-                    key: _signinKey,
-                    child: Column(
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        SizedBox(
-                          height: 12.0,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(12.0),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFffd394),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    padding: EdgeInsets.all(16.0),
+                    //alignment: Alignment.center,
+                    child: Form(
+                        key: _signinKey,
+                        child: Column(
+                          //crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            SizedBox(
+                              height: 12.0,
                             ),
-                            hintText: 'Email Address',
-                            hintStyle:
-                                TextStyle(fontSize: 18.0, color: Colors.white),
-                            filled: true,
-                            fillColor: Color(0xFFcaa382),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please Enter valid email address";
-                            }
-                            return null;
-                          },
-                          onSaved: (newValue) {
-                            _signin = SignUp(
-                              password: _signin.password,
-                              userEmail: newValue.toString(),
-                            );
-                          },
-                        ),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            hintText: 'password',
-                            hintStyle:
-                                TextStyle(fontSize: 18.0, color: Colors.white),
-                            filled: true,
-                            fillColor: Color(0xFFcaa382),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscureText
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.black,
+                            TextFormField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                hintText: 'Email Address',
+                                hintStyle: TextStyle(
+                                    fontSize: 18.0, color: Colors.white),
+                                filled: true,
+                                fillColor: Color(0xFFcaa382),
                               ),
-                              onPressed: _toggle,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Please Enter valid email address";
+                                }
+                                return null;
+                              },
+                              onSaved: (newValue) {
+                                _signin = SignUp(
+                                  password: _signin.password,
+                                  userEmail: newValue.toString(),
+                                );
+                              },
                             ),
-                          ),
-                          obscureText: _obscureText,
-                          textInputAction: TextInputAction.done,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please enter valid password";
-                            }
-                            return null;
-                          },
-                          onSaved: (newValue) {
-                            _signin = SignUp(
-                              password: newValue.toString(),
-                              userEmail: _signin.userEmail,
-                            );
-                          },
-                        ),
-                        Container(
-                          alignment: Alignment.centerRight,
-                          height: 35,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Forgot Password ?',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 18),
+                            SizedBox(
+                              height: 8.0,
                             ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 25.0,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: Size(175, 55),
-                            primary: Color(0xFFcaa382),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0)),
-                          ),
-                          onPressed: _saveSignIn,
-                          child: Text(
-                            'Log-in',
-                            textAlign: TextAlign.center,
+                            TextFormField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                hintText: 'password',
+                                hintStyle: TextStyle(
+                                    fontSize: 18.0, color: Colors.white),
+                                filled: true,
+                                fillColor: Color(0xFFcaa382),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.black,
+                                  ),
+                                  onPressed: _toggle,
+                                ),
+                              ),
+                              obscureText: _obscureText,
+                              textInputAction: TextInputAction.done,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Please enter valid password";
+                                }
+                                return null;
+                              },
+                              onSaved: (newValue) {
+                                _signin = SignUp(
+                                  password: newValue.toString(),
+                                  userEmail: _signin.userEmail,
+                                );
+                              },
+                            ),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              height: 35,
+                              child: TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Forgot Password ?',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 25.0,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                fixedSize: Size(175, 55),
+                                primary: Color(0xFFcaa382),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0)),
+                              ),
+                              onPressed: _saveSignIn,
+                              child: Text(
+                                'Log-in',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                  Container(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Please create Account.',
                             style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.black,
+                                fontSize: 19,
+                                color: Color(0xFF070000),
                                 fontWeight: FontWeight.bold),
                           ),
-                        ),
-                      ],
-                    )),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                                //backgroundColor: Color(0xFFb57322),
+                                ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Row(
+                              children: const [
+                                Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      color: Color(0xFFb57322),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Icon(
+                                  Icons.login,
+                                  color: Color(0xFFb57322),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                  )
+                ],
               ),
-              Container(
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text('Please create Account.'),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Row(
-                      children: const [
-                        Text('Sign Up'),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Icon(Icons.login),
-                      ],
-                    ),
-                  ),
-                ]),
-              )
-            ],
+            ),
           ),
         ),
       ),
