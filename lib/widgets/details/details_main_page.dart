@@ -44,7 +44,7 @@ class _DetailsMainPageState extends State<DetailsMainPage> {
               child: Row(
                 children: [
                   Container(
-                    width: 100,
+                    width: MediaQuery.of(context).size.width / 3.9,
                     height: 300,
                     child: SingleChildScrollView(
                       child: Column(
@@ -70,7 +70,7 @@ class _DetailsMainPageState extends State<DetailsMainPage> {
                   Container(
                     margin: EdgeInsets.only(left: 10.0),
                     child: Image(
-                      width: 300,
+                      width: MediaQuery.of(context).size.width / 1.4,
                       height: 300,
                       fit: BoxFit.fill,
                       image: NetworkImage(

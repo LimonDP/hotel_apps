@@ -455,8 +455,8 @@ class _CheckOutMainState extends State<CheckOutMain> {
                             ),
                             alignment: Alignment.center,
                             width: MediaQuery.of(context).size.width / 3,
-                            child: const Text(
-                              '300',
+                            child: Text(
+                              _totalPrice.toString(),
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -650,67 +650,68 @@ class _CheckOutMainState extends State<CheckOutMain> {
                 height: 20,
               ),
               Container(
-                margin: EdgeInsets.only(left: 16.0),
+                margin: const EdgeInsets.only(left: 16.0, right: 16.0),
                 width: MediaQuery.of(context).size.width,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0))),
-                      onPressed: () {},
-                      child: Image(
-                        width: 50,
-                        height: 60,
-                        image: NetworkImage(
-                            'https://download.logo.wine/logo/BKash/BKash-Icon-Logo.wine.png'),
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/bikash.jpg')),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {},
                       ),
                     ),
                     SizedBox(
                       width: 6,
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0))),
-                      onPressed: () {},
-                      child: Image(
-                        width: 50,
-                        height: 60,
-                        image: NetworkImage(
-                            'https://download.logo.wine/logo/BKash/BKash-Icon-Logo.wine.png'),
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/rocket.png')),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {},
                       ),
                     ),
                     SizedBox(
                       width: 6,
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0))),
-                      onPressed: () {},
-                      child: Image(
-                        width: 50,
-                        height: 60,
-                        image: NetworkImage(
-                            'https://download.logo.wine/logo/BKash/BKash-Icon-Logo.wine.png'),
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/naged.png')),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {},
                       ),
                     ),
                     SizedBox(
                       width: 6,
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16.0))),
-                      onPressed: () {},
-                      child: Image(
-                        width: 50,
-                        height: 60,
-                        image: NetworkImage(
-                            'https://download.logo.wine/logo/BKash/BKash-Icon-Logo.wine.png'),
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/nexuspay.jpeg')),
                       ),
-                    )
+                      child: GestureDetector(
+                        onTap: () {},
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -26,7 +26,7 @@ class RoomCard extends StatelessWidget {
         child: Column(
           children: [
             Image(
-              height: 130,
+              height: 120,
               fit: BoxFit.cover,
               image: NetworkImage(imgaeUrl),
             ),
@@ -39,13 +39,7 @@ class RoomCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(onPressed: () {}, child: const Text('limon')),
-                    TextButton(onPressed: () {}, child: const Text('limon')),
-                  ],
-                ),
+                TextButton(onPressed: () {}, child: const Text('limon')),
                 TextButton(
                     style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
