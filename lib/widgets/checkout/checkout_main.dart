@@ -77,18 +77,21 @@ class _CheckOutMainState extends State<CheckOutMain> {
         .bedList
         .where((element) => element['name'] == _bed);
     _total.add(_getbed.first['price']);
+
     final _getwindow = Provider.of<RoomProvider>(context)
         .windowsList
         .where((element) => element['name'] == _window);
     _total.add(_getwindow.first['price']);
+
     final _getfloor = Provider.of<RoomProvider>(context)
         .floorStyleList
         .where((element) => element['name'] == _floorStyle);
     _total.add(_getfloor.first['price']);
+
     final _getac = Provider.of<RoomProvider>(context)
         .acList
         .where((element) => element['name'] == _ac);
-    _total.add(_getfloor.first['price']);
+    _total.add(_getac.first['price']);
     final _gettable = Provider.of<RoomProvider>(context)
         .tableList
         .where((element) => element['name'] == _table);
@@ -97,6 +100,17 @@ class _CheckOutMainState extends State<CheckOutMain> {
         .balconyList
         .where((element) => element['name'] == _balcony.toString());
     _total.add(_getbalcony.first['price']);
+    // double total_data = 0.0;
+    // _total.map((e) {
+    //   setState(() {
+    //     total_data += e;
+    //   });
+    // });
+    // print(_total);
+    // for (var item in _total) {
+    //   total_data += item;
+    // }
+    //
     double _totalPrice = _total.reduce((a, b) => a + b);
 
     return Scaffold(
