@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_app/data/room_data.dart';
 import 'package:hotel_app/data/user_provider.dart';
-import 'package:hotel_app/widgets/checkout/checkcout.dart';
+
 import 'package:hotel_app/widgets/checkout/checkout_main.dart';
 import 'package:hotel_app/widgets/checkout/checkout_provider.dart';
 
 import 'package:hotel_app/widgets/details/details_main_page.dart';
 import 'package:hotel_app/widgets/home/home_main.dart';
+import 'package:hotel_app/widgets/profile/profile_main.dart';
 import 'package:hotel_app/widgets/signup/signin.dart';
 import 'package:hotel_app/widgets/signup/signup_main.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ void main() {
         initialRoute: '/',
         routes: {
           '/': (context) => MyApp(),
+          '/profile': (context) => Profile(),
           '/sign-up': (context) => const SignUpMainPage(),
           '/log-in': (context) => const SignIn(),
           '/details': (context) => const DetailsMainPage(),
@@ -112,6 +114,11 @@ class _MyAppState extends State<MyApp> {
                 textVAlue: 'Rooms',
                 menuIcon: Icon(Icons.bed_outlined),
                 route: '/rooms',
+              ),
+              HomeMuenuButton(
+                textVAlue: 'Profile',
+                menuIcon: Icon(Icons.manage_accounts),
+                route: '/profile',
               ),
               HomeMuenuButton(
                 textVAlue: 'Services',

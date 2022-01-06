@@ -675,7 +675,7 @@ class _CheckOutMainState extends State<CheckOutMain> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16.0),
                         image: DecorationImage(
-                            image: AssetImage('assets/images/bikash.jpg')),
+                            image: AssetImage('assets/images/bkash.jpg')),
                       ),
                       child: GestureDetector(
                         onTap: () {},
