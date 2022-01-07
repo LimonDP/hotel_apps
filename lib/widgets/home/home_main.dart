@@ -13,24 +13,34 @@ class HomeMainPage extends StatelessWidget {
   // const HomeMainPage({Key? key}) : super(key: key);
   List itemList = [
     {
-      'textValue': '20 % disscound',
+      'textValue': 'Freedom Fighter 40% Discount',
       'backgroundColor': Colors.green.shade500,
     },
     {
-      'textValue': '10 % disscound',
+      'textValue': 'Friday Deals 5% Discount',
       'backgroundColor': Colors.orange.shade500,
     },
     {
-      'textValue': ' 5 % disscound',
+      'textValue': ' Regular Customer 15% Discount',
       'backgroundColor': Colors.cyan.shade500,
     },
     {
-      'textValue': '40 % disscound',
+      'textValue': 'Monthly OnSale 10% Discount',
+      'backgroundColor': Colors.pink.shade500,
+    },
+    {
+      'textValue': 'Student 20% Discount',
       'backgroundColor': Colors.red.shade500,
     }
   ];
   @override
   Widget build(BuildContext context) {
+    final _singlebeds = Provider.of<RoomProvider>(context).roomList;
+    final _bed = Provider.of<RoomProvider>(context).bedList;
+    final _dataList =
+        _singlebeds.where((element) => element.bed == 'Single Bed');
+    final _dataList1 =
+        _singlebeds.where((element) => element.bed == 'Double Bed');
     return Column(
       //shrinkWrap: true,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,7 +66,7 @@ class HomeMainPage extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            'text ${i['textValue']}',
+                            '${i['textValue']}',
                             style: TextStyle(
                                 fontSize: 38.0,
                                 fontWeight: FontWeight.bold,
@@ -72,7 +82,7 @@ class HomeMainPage extends StatelessWidget {
                   viewportFraction: 1.0,
                   height: 170,
                   autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 10),
+                  autoPlayInterval: const Duration(seconds: 5),
                 ),
               ),
             ],
@@ -227,7 +237,33 @@ class HomeMainPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              SingleBed()
+              SingleBed(
+                selectedRoom: _dataList,
+              ),
+              Container(
+                margin: EdgeInsets.all(10.0),
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                decoration: BoxDecoration(
+                  color: Colors.red.shade300,
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+                child: Text(
+                  'Double Bed',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              SingleBed(
+                selectedRoom: _dataList1,
+              ),
             ],
           ),
         )

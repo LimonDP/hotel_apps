@@ -54,7 +54,7 @@ class OneTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: TextButton.styleFrom(fixedSize: Size.fromHeight(60)),
+      style: TextButton.styleFrom(fixedSize: const Size.fromHeight(60)),
       onPressed: () {
         Navigator.of(context).pushNamed(routeName!);
       },

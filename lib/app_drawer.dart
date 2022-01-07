@@ -35,7 +35,7 @@ class AppDrawer extends StatelessWidget {
             HomeMuenuButton(
               textVAlue: 'Home',
               menuIcon: Icon(Icons.home),
-              route: '/',
+              route: '/home',
             ),
             HomeMuenuButton(
               textVAlue: 'Rooms',
@@ -48,21 +48,27 @@ class AppDrawer extends StatelessWidget {
               route: '/profile',
             ),
             HomeMuenuButton(
-              textVAlue: 'Services',
+              textVAlue: 'Complains',
               menuIcon: Icon(Icons.miscellaneous_services),
+              route: '/complains',
             ),
             HomeMuenuButton(
               textVAlue: 'Checkout',
               menuIcon: Icon(Icons.check_box_outlined),
             ),
+            // HomeMuenuButton(
+            //   textVAlue: 'Comments',
+            //   menuIcon: Icon(Icons.comment_outlined),
+            // ),
             HomeMuenuButton(
-              textVAlue: 'Comments',
+              textVAlue: 'Suggestions',
               menuIcon: Icon(Icons.comment_outlined),
+              route: '/suggestions',
             ),
-            HomeMuenuButton(
-              textVAlue: 'Exit App',
-              menuIcon: Icon(Icons.exit_to_app),
-            ),
+            // HomeMuenuButton(
+            //   textVAlue: 'Exit App',
+            //   menuIcon: Icon(Icons.exit_to_app),
+            // ),
           ],
         ),
       ),

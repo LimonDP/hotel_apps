@@ -93,14 +93,11 @@ class _RoomsState extends State<Rooms> {
                 ],
               ),
             ),
-            RoomFilterExpansion(
-              getList: _allbed,
-            ),
-            WindowsFilterExpansion(
-              getList: Provider.of<RoomProvider>(context).windowsList,
-            ),
             // RoomFilterExpansion(
-            //   getList: Provider.of<RoomProvider>(context).acList,
+            //   getList: _allbed,
+            // ),
+            // WindowsFilterExpansion(
+            //   getList: Provider.of<RoomProvider>(context).windowsList,
             // ),
           ],
         ),

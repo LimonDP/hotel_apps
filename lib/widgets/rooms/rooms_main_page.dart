@@ -23,12 +23,6 @@ class RoomsPage extends StatelessWidget {
     final List<Room> dataList =
         Provider.of<RoomProvider>(context, listen: false).roomList;
 
-    // final _list = dataList.where((element) =>
-    //     bed[element.ac] == args.selectName ||
-    //     windows[element.windowsId] == args.selectName ||
-    //     _floor[element.floorStyleId] == args.selectName ||
-    //     _table[element.withTableId] == args.selectName ||
-    //     _ac[element.acId] == args.selectName);
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -51,18 +45,6 @@ class RoomsPage extends StatelessWidget {
             itemCount: dataList.length,
             itemBuilder: (BuildContext context, int index) =>
                 NewItemBuilder(indexs: index)),
-        // body: GridView.count(
-        //     crossAxisCount: 2,
-        //     shrinkWrap: true,
-        //     children: <Widget>[
-        //       ..._list.map((e) {
-        //         return RoomCard(
-        //           roomTitle: e.title,
-        //           roomsize: e.size.round(),
-        //           imgaeUrl: e.imageList[0],
-        //         );
-        //       }).toList()
-        //     ]),
       ),
     );
   }

@@ -669,7 +669,7 @@ class RoomProvider with ChangeNotifier {
     ),
     Room(
       roomId: 'r605',
-      bed: 'Single Bed',
+      bed: 'Double Bed',
       windows: '1 window right',
       withTable: 'Side Desk',
       floorStyle: 'Tiles',

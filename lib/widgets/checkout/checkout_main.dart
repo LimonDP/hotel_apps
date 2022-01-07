@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hotel_app/data/room_class.dart';
 import 'package:hotel_app/data/room_data.dart';
@@ -15,18 +13,22 @@ class CheckOutMain extends StatefulWidget {
 }
 
 class _CheckOutMainState extends State<CheckOutMain> {
+  final List<DateTime> _addOut = [DateTime.now(), DateTime.now()];
+
   final _inDateController = TextEditingController();
   final _outDateController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   DateTime _start = DateTime.now();
   DateTime _out = DateTime.now();
-
   void _outdate() async {
     final _inDate = await Provider.of<CheckOutProvider>(context, listen: false)
         .selectDate(context);
     if (_inDate == null) return;
     setState(() {
-      DateTime _out = DateTime(_inDate.year, _inDate.month, _inDate.day);
+      _out = DateTime(_inDate.year, _inDate.month, _inDate.day);
       _outDateController.text = DateFormat('yyyy-MM-dd').format(_out);
+
+      _addOut[1] = _out;
     });
   }
 
@@ -35,19 +37,12 @@ class _CheckOutMainState extends State<CheckOutMain> {
         .selectDate(context);
     if (_inDate == null) return;
     setState(() {
-      DateTime _start = DateTime(_inDate.year, _inDate.month, _inDate.day);
+      _start = DateTime(_inDate.year, _inDate.month, _inDate.day);
       _inDateController.text = DateFormat('yyyy-MM-dd').format(_start);
+
+      _addOut[0] = _start;
     });
   }
-
-  // void dateSub() {
-  //   setState(() {
-  //     DateTime _outDate = DateTime(_out.year, _out.month, _out.day);
-  //     DateTime _inDate = DateTime(_start.year, _start.month, _start.day);
-  //     int day = _outDate.difference(_inDate).inDays;
-  //     print(day);
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +54,6 @@ class _CheckOutMainState extends State<CheckOutMain> {
     String? _balcony;
     String? _ac;
 
-    ///data get
     final _args = ModalRoute.of(context)!.settings.arguments as SelectedData;
     final _room = Provider.of<RoomProvider>(context)
         .roomList
@@ -100,18 +94,14 @@ class _CheckOutMainState extends State<CheckOutMain> {
         .balconyList
         .where((element) => element['name'] == _balcony.toString());
     _total.add(_getbalcony.first['price']);
-    // double total_data = 0.0;
-    // _total.map((e) {
-    //   setState(() {
-    //     total_data += e;
-    //   });
-    // });
-    // print(_total);
-    // for (var item in _total) {
-    //   total_data += item;
-    // }
-    //
+
     double _totalPrice = _total.reduce((a, b) => a + b);
+    double total = 0.0;
+    if (_addOut.isNotEmpty) {
+      final int days = _addOut[1].difference(_addOut[0]).inDays;
+
+      total += days.toDouble() * _totalPrice;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -483,184 +473,169 @@ class _CheckOutMainState extends State<CheckOutMain> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Container(
-                //width: double.infinity,
-                padding: EdgeInsets.all(26.0),
-                decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(16.0)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2.4,
-                            height: 40,
-                            padding: EdgeInsets.only(
-                              top: 12.0,
-                            ),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16.0),
-                                    bottomLeft: Radius.circular(16.0))),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'yyyy-mm-dd',
-                                  hintStyle: TextStyle(fontSize: 20)
-
-                                  //filled: true,
-                                  //fillColor: Colors.white,
-                                  ),
-                              keyboardType: TextInputType.datetime,
-                              onTap: () => _indate(),
-                              controller: _inDateController,
-                              textInputAction: TextInputAction.done,
-                              onSubmitted: (value) {},
-                            ),
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2.6,
-                            height: 40,
-                            padding: EdgeInsets.only(
-                              top: 12.0,
-                            ),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(16.0),
-                                    bottomRight: Radius.circular(16.0))),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'yyyy-mm-dd',
-                                  hintStyle: TextStyle(fontSize: 20)
-                                  //filled: true,
-                                  //fillColor: Colors.white,
-                                  ),
-                              keyboardType: TextInputType.datetime,
-                              onTap: () => _indate(),
-                              controller: _inDateController,
-                              textInputAction: TextInputAction.done,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    Container(
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2.4,
-                            height: 40,
-                            padding: EdgeInsets.only(
-                              top: 12.0,
-                            ),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(16.0),
-                                    bottomLeft: Radius.circular(16.0))),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'yyyy-mm-dd',
-                                  hintStyle: TextStyle(fontSize: 20)
-
-                                  //filled: true,
-                                  //fillColor: Colors.white,
-                                  ),
-                              keyboardType: TextInputType.datetime,
-                              onTap: () => _outdate(),
-                              controller: _outDateController,
-                              textInputAction: TextInputAction.done,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width / 2.6,
-                            height: 40,
-                            padding: EdgeInsets.only(
-                              top: 12.0,
-                            ),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(16.0),
-                                    bottomRight: Radius.circular(16.0))),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'yyyy-mm-dd',
-                                  hintStyle: TextStyle(fontSize: 20)
-                                  //filled: true,
-                                  //fillColor: Colors.white,
-                                  ),
-                              keyboardType: TextInputType.datetime,
-                              onTap: () => _indate(),
-                              controller: _inDateController,
-                              textInputAction: TextInputAction.done,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    Container(
-                      child: Row(
-                        children: [
-                          Container(
+              Form(
+                key: _formKey,
+                child: Container(
+                  //width: double.infinity,
+                  padding: const EdgeInsets.all(26.0),
+                  decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(16.0)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Row(
+                          children: [
+                            Container(
                               width: MediaQuery.of(context).size.width / 2.4,
                               height: 40,
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                 top: 12.0,
                               ),
-                              child: Text(
-                                'TOTAL',
-                                style: TextStyle(fontSize: 24),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16.0),
+                                      bottomLeft: Radius.circular(16.0))),
+                              child: TextFormField(
+                                readOnly: true,
                                 textAlign: TextAlign.center,
-                              )),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Container(
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Check-In',
+                                    hintStyle: TextStyle(fontSize: 20)),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 2.6,
+                              height: 40,
+                              padding: const EdgeInsets.only(
+                                top: 12.0,
+                              ),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0))),
+                              child: TextFormField(
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'yyyy-mm-dd',
+                                    hintStyle: TextStyle(fontSize: 20)),
+                                keyboardType: TextInputType.datetime,
+                                onTap: () => _indate(),
+                                controller: _inDateController,
+                                textInputAction: TextInputAction.done,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Container(
+                        child: Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width / 2.4,
+                              height: 40,
+                              padding: const EdgeInsets.only(
+                                top: 12.0,
+                              ),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16.0),
+                                      bottomLeft: Radius.circular(16.0))),
+                              child: TextFormField(
+                                readOnly: true,
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Check-Out',
+                                    hintStyle: TextStyle(fontSize: 20)),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Container(
                               width: MediaQuery.of(context).size.width / 2.6,
                               height: 40,
                               padding: EdgeInsets.only(
                                 top: 12.0,
                               ),
-                              child: Text(
-                                '40000',
-                                style: TextStyle(fontSize: 24),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(16.0))),
+                              child: TextFormField(
                                 textAlign: TextAlign.center,
-                              ))
-                        ],
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'yyyy-mm-dd',
+                                    hintStyle: TextStyle(fontSize: 20)
+                                    //filled: true,
+                                    //fillColor: Colors.white,
+                                    ),
+                                keyboardType: TextInputType.datetime,
+                                onTap: () => _outdate(),
+                                controller: _outDateController,
+                                textInputAction: TextInputAction.done,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Container(
+                        child: Row(
+                          children: [
+                            Container(
+                                width: MediaQuery.of(context).size.width / 2.4,
+                                height: 40,
+                                padding: const EdgeInsets.only(
+                                  top: 12.0,
+                                ),
+                                child: const Text(
+                                  'TOTAL',
+                                  style: TextStyle(fontSize: 24),
+                                  textAlign: TextAlign.center,
+                                )),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Container(
+                                width: MediaQuery.of(context).size.width / 2.6,
+                                height: 40,
+                                padding: const EdgeInsets.only(
+                                  top: 12.0,
+                                ),
+                                child: Text(
+                                  total.abs().toString(),
+                                  style: const TextStyle(fontSize: 24),
+                                  textAlign: TextAlign.center,
+                                ))
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -729,21 +704,21 @@ class _CheckOutMainState extends State<CheckOutMain> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
                 alignment: Alignment.centerRight,
-                margin: EdgeInsets.only(right: 20.0),
+                margin: const EdgeInsets.only(right: 20.0),
                 //width: 80,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      fixedSize: Size(140, 50),
+                      fixedSize: const Size(140, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'PAY',
                       textAlign: TextAlign.center,
                       style:

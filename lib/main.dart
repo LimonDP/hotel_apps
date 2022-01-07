@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_app/app_drawer.dart';
-import 'package:hotel_app/data/room_data.dart';
-import 'package:hotel_app/data/user_provider.dart';
+import 'package:hotel_app/widgets/suggesiton/complains.dart';
+import './app_drawer.dart';
+import './data/room_data.dart';
+import './data/user_provider.dart';
 
-import 'package:hotel_app/widgets/checkout/checkout_main.dart';
-import 'package:hotel_app/widgets/checkout/checkout_provider.dart';
+import './widgets/checkout/checkout_main.dart';
+import './widgets/checkout/checkout_provider.dart';
 
-import 'package:hotel_app/widgets/details/details_main_page.dart';
-import 'package:hotel_app/widgets/first_page.dart';
-import 'package:hotel_app/widgets/home/home_main.dart';
-import 'package:hotel_app/widgets/profile/profile_main.dart';
-import 'package:hotel_app/widgets/signup/signin.dart';
-import 'package:hotel_app/widgets/signup/signup_main.dart';
+import './widgets/details/details_main_page.dart';
+import './widgets/first_page.dart';
+import './widgets/home/home_main.dart';
+import './widgets/profile/profile_main.dart';
+import './widgets/signup/signin.dart';
+import './widgets/signup/signup_main.dart';
 import 'package:provider/provider.dart';
 
 import 'widgets/rooms/rooms.dart';
 import 'widgets/rooms/rooms_main_page.dart';
 import 'widgets/selected/selected.dart';
+import 'widgets/suggesiton/suggestion.dart';
 
 void main() {
   runApp(
@@ -41,8 +43,9 @@ void main() {
           '/selected': (context) => const Selected(),
           '/rooms': (context) => Rooms(),
           '/selected-rooms': (context) => const RoomsPage(),
-          //'/checkout': (context) => CheckOut(),
-          '/checkout': (context) => const CheckOutMain()
+          '/checkout': (context) => const CheckOutMain(),
+          '/complains': (context) => const Complain(),
+          '/suggestions': (context) => const Suggestion()
         },
         debugShowCheckedModeBanner: false,
       ),
@@ -63,26 +66,50 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: Colors.red.shade200,
-          title: Text("Kanchenjunga"),
-          centerTitle: true,
-          actions: [
-            TextButton(
-              onPressed: () {
-                scaffoldKey.currentState!.openEndDrawer();
-              },
-              child: Icon(
-                Icons.more_vert,
-                color: Colors.white,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              centerTitle: true,
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    scaffoldKey.currentState!.openEndDrawer();
+                  },
+                  child: Icon(
+                    Icons.more_vert,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+              expandedHeight: 60,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text('SMART HOTEL'),
               ),
             ),
+            SliverList(delegate: SliverChildListDelegate([HomeMainPage()]))
           ],
         ),
-        body: SingleChildScrollView(
-          //physics: const NeverScrollableScrollPhysics(),
-          child: HomeMainPage(),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.red.shade200,
+        //   title: Text("Kanchenjunga"),
+        //   centerTitle: true,
+        //   actions: [
+        //     TextButton(
+        //       onPressed: () {
+        //         scaffoldKey.currentState!.openEndDrawer();
+        //       },
+        //       child: Icon(
+        //         Icons.more_vert,
+        //         color: Colors.white,
+        //       ),
+        //     ),
+        //   ],
+        // ),
+
+        // body: SingleChildScrollView(
+        //   //physics: const NeverScrollableScrollPhysics(),
+        //   child: HomeMainPage(),
+        // ),
         endDrawer: AppDrawer());
   }
 }

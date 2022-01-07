@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_app/app_drawer.dart';
+import '/app_drawer.dart';
+import '/data/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
   //const Profile({Key? key}) : super(key: key);
@@ -7,6 +9,8 @@ class Profile extends StatelessWidget {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final _userdata = Provider.of<UserProvider>(context).users;
+    print(_userdata.first.userName);
     return Scaffold(
       key: _scaffoldKey,
       body: CustomScrollView(
@@ -63,8 +67,8 @@ class Profile extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const Text(
-                              'Limon Ray',
+                            Text(
+                              _userdata.first.userName.toString().toUpperCase(),
                               style: TextStyle(
                                 fontSize: 19,
                               ),
@@ -107,8 +111,8 @@ class Profile extends StatelessWidget {
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
-                                      child: const Text(
-                                        'Name     : Limon chandra ray',
+                                      child: Text(
+                                        'Name     : ${_userdata.first.userName.toString().toUpperCase()}',
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
@@ -117,9 +121,9 @@ class Profile extends StatelessWidget {
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       child: Row(
-                                        children: const [
+                                        children: [
                                           Text(
-                                            'Age         : 22',
+                                            'Age         : ${_userdata.first.age.toString().toUpperCase()}',
                                             style: TextStyle(
                                               fontSize: 16,
                                             ),
@@ -139,7 +143,7 @@ class Profile extends StatelessWidget {
                                     Container(
                                         alignment: Alignment.centerLeft,
                                         child: const Text(
-                                          'Address : Panchagarh,Rangpur',
+                                          'Address : Mirpur, Dhaka',
                                           style: TextStyle(
                                             fontSize: 16,
                                           ),
@@ -215,8 +219,8 @@ class Profile extends StatelessWidget {
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
-                                      child: const Text(
-                                        'Mail : limonroy.19cse013@gmail.com',
+                                      child: Text(
+                                        'Mail : ${_userdata.first.userEmail.toString()}',
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
@@ -225,7 +229,7 @@ class Profile extends StatelessWidget {
                                     Container(
                                         alignment: Alignment.centerLeft,
                                         child: const Text(
-                                          'Password : ***********',
+                                          'Password : @**********#',
                                           style: TextStyle(
                                             fontSize: 16,
                                           ),
