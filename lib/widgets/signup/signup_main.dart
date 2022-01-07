@@ -51,7 +51,6 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                 children: [
                   Container(
                     width: 350,
-                    //height: 420,
                     decoration: BoxDecoration(
                       color: Color(0xFFffd394),
                       borderRadius: BorderRadius.circular(16.0),
@@ -92,7 +91,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                 );
                               },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8.0,
                             ),
                             TextFormField(
@@ -102,7 +101,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 hintText: 'Age',
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 18.0, color: Colors.white),
                                 filled: true,
                                 fillColor: Color(0xFFcaa382),
@@ -125,7 +124,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                 );
                               },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8.0,
                             ),
                             TextFormField(
@@ -135,7 +134,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 hintText: 'Email Address',
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 18.0, color: Colors.white),
                                 filled: true,
                                 fillColor: Color(0xFFcaa382),
@@ -161,7 +160,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                 );
                               },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8.0,
                             ),
                             TextFormField(
@@ -172,7 +171,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   hintText: 'password',
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                       fontSize: 18.0, color: Colors.white),
                                   filled: true,
                                   fillColor: Color(0xFFcaa382),
@@ -181,6 +180,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                       _obscureText
                                           ? Icons.visibility
                                           : Icons.visibility_off,
+                                      color: Colors.black,
                                     ),
                                     onPressed: () {
                                       setState(() {
@@ -206,7 +206,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                 );
                               },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 25.0,
                             ),
                             ElevatedButton(
@@ -217,7 +217,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                                     borderRadius: BorderRadius.circular(18.0)),
                               ),
                               onPressed: _saveSingup,
-                              child: Text(
+                              child: const Text(
                                 'Create Account',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(

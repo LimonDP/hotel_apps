@@ -10,7 +10,7 @@ class Room {
   final double size;
   final String title;
   final List imageList;
-  final bool stock;
+  final bool? isFavorite;
   Room(
       {required this.roomId,
       required this.bed,
@@ -23,7 +23,7 @@ class Room {
       required this.title,
       required this.size,
       required this.imageList,
-      this.stock = false});
+      this.isFavorite});
 }
 
 class SelectedData {

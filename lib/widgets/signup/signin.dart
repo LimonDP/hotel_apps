@@ -108,20 +108,16 @@ class _SignInState extends State<SignIn> {
                 children: [
                   Container(
                     width: 350,
-                    height: 320,
-
                     decoration: BoxDecoration(
-                      color: Color(0xFFffd394),
+                      color: const Color(0xFFffd394),
                       borderRadius: BorderRadius.circular(16.0),
                     ),
-                    padding: EdgeInsets.all(16.0),
-                    //alignment: Alignment.center,
+                    padding: const EdgeInsets.all(16.0),
                     child: Form(
                         key: _signinKey,
                         child: Column(
-                          //crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 12.0,
                             ),
                             TextFormField(
@@ -131,7 +127,7 @@ class _SignInState extends State<SignIn> {
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 hintText: 'Email Address',
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 18.0, color: Colors.white),
                                 filled: true,
                                 fillColor: Color(0xFFcaa382),

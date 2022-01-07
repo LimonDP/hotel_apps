@@ -3,6 +3,7 @@ import 'package:hotel_app/data/room_data.dart';
 import 'package:hotel_app/widgets/rooms/room_card.dart';
 import 'package:provider/provider.dart';
 
+import '../bottom_navigation_bar.dart';
 import 'expansion.dart';
 import 'windows_expansion.dart';
 
@@ -12,15 +13,18 @@ class Rooms extends StatefulWidget {
 }
 
 class _RoomsState extends State<Rooms> {
-  var _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     final _allRoom = Provider.of<RoomProvider>(context).roomList;
     final _allbed = Provider.of<RoomProvider>(context).bedList;
-    print(_allRoom.length);
+
     return Scaffold(
       key: _scaffoldKey,
+      bottomNavigationBar: const BottomAppBar(
+        child: BottomBar(),
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -29,13 +33,13 @@ class _RoomsState extends State<Rooms> {
                 onPressed: () {
                   _scaffoldKey.currentState!.openEndDrawer();
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.more_vert,
                   color: Colors.white,
                 ),
               ),
             ],
-            flexibleSpace: FlexibleSpaceBar(
+            flexibleSpace: const FlexibleSpaceBar(
               title: Text("Rooms"),
             ),
           ),
@@ -58,7 +62,7 @@ class _RoomsState extends State<Rooms> {
         backgroundColor: Colors.red.shade100,
         child: ListView(
           shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           children: [
             const SizedBox(
               height: 10,
@@ -74,13 +78,13 @@ class _RoomsState extends State<Rooms> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.align_horizontal_left_rounded,
                     color: Colors.white,
                   ),
-                  Text(
+                  const Text(
                     'Filters',
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),

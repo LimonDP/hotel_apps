@@ -77,6 +77,7 @@ class NewItemBuilder extends StatelessWidget {
     final List<Room> dataList =
         Provider.of<RoomProvider>(context, listen: false).roomList;
     return RoomCard(
+        isFavorite: dataList[indexs].isFavorite,
         roomId: dataList[indexs].roomId,
         roomTitle: dataList[indexs].title,
         roomsize: dataList[indexs].size.round(),

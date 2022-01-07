@@ -673,6 +673,7 @@ class RoomProvider with ChangeNotifier {
       windows: '1 window right',
       withTable: 'Side Desk',
       floorStyle: 'Tiles',
+      isFavorite: true,
       ac: 'No',
       balcony: 'Yes',
       title: 'Room 605',
