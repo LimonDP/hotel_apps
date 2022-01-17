@@ -12,22 +12,20 @@ class DetailsMainPage extends StatefulWidget {
 }
 
 class _DetailsMainPageState extends State<DetailsMainPage> {
-  final List<dynamic> _images = [];
-
-  String? _imageIndex;
+  int _imageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final List _images = [];
     final _args = ModalRoute.of(context)!.settings.arguments as SelectedData;
     final _roomsData = Provider.of<RoomProvider>(context)
         .roomList
         .where((element) => element.roomId == _args.detailsRoomId);
     _roomsData.forEach((element) {
       for (var item in element.imageList) {
-        _images.add(item);
+        _images.add(item['stringValue']);
       }
     });
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFFF8F51),
@@ -50,24 +48,21 @@ class _DetailsMainPageState extends State<DetailsMainPage> {
                       height: 300,
                       child: SingleChildScrollView(
                         child: Column(
-                          children: [
-                            ..._images.map((imagelink) {
-                              return Container(
-                                margin: const EdgeInsets.all(4),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _imageIndex = imagelink;
-                                    });
-                                  },
-                                  child: Image(
-                                      width: 90,
-                                      image: NetworkImage(imagelink)),
-                                ),
-                              );
-                            }).toList()
-                          ],
-                        ),
+                            children: _images.map((imagelink) {
+                          return Container(
+                            margin: const EdgeInsets.all(4),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _imageIndex = _images.indexOf(imagelink);
+                                });
+                              },
+                              child: Image(
+                                  width: 90,
+                                  image: NetworkImage(imagelink.toString())),
+                            ),
+                          );
+                        }).toList()),
                       ),
                     ),
                     Container(
@@ -76,8 +71,7 @@ class _DetailsMainPageState extends State<DetailsMainPage> {
                         width: MediaQuery.of(context).size.width / 1.4,
                         height: 300,
                         fit: BoxFit.fill,
-                        image: NetworkImage(
-                            _imageIndex == null ? _images[0] : _imageIndex),
+                        image: NetworkImage(_images[_imageIndex] ?? _images[0]),
                       ),
                     ),
                   ],
@@ -157,7 +151,7 @@ class _DetailsMainPageState extends State<DetailsMainPage> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text('Bed : ${_roomsData.first.bed}'),
+                      title: Text('Bed : ${_roomsData.first.roomId}'),
                     ),
                     ListTile(
                       title: Text('Window : ${_roomsData.first.windows}'),

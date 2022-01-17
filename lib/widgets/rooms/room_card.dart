@@ -38,7 +38,7 @@ class _RoomCardState extends State<RoomCard> {
               image: NetworkImage(widget.imgaeUrl),
             ),
             Text(
-              widget.roomTitle.toString(),
+              widget.roomId.toString(),
               textAlign: TextAlign.left,
               overflow: TextOverflow.ellipsis,
               //maxLines: 1,

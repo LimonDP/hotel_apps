@@ -11,7 +11,7 @@ class BottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           OneTextButton(
-            routeName: '/home',
+            routeName: '/',
             buttonIcon: const Icon(
               Icons.home,
               color: Colors.grey,

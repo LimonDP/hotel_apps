@@ -2,7 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:hotel_app/data/signup.dart';
-import 'package:hotel_app/data/user_provider.dart';
+
+import 'package:hotel_app/models/authentication.dart';
 import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
@@ -21,73 +22,86 @@ class _SignInState extends State<SignIn> {
     });
   }
 
-  var _signin = SignUp(
-    password: '',
-    userEmail: '',
-  );
-  _saveSignIn() {
+  // var _signin = SignUp(
+  //   password: '',
+  //   userEmail: '',
+  // );
+
+  final Map<String, String> _signInData = {
+    'email': '',
+    'password': '',
+  };
+  Future<void> saveSignIn() async {
     final _validationState = _signinKey.currentState!.validate();
     if (!_validationState) {
       return;
     }
     _signinKey.currentState!.save();
-    final signinProvider =
-        Provider.of<UserProvider>(context, listen: false).users;
-    for (var item in signinProvider) {
-      if (item.userEmail == _signin.userEmail &&
-          item.password == _signin.password) {
-        Navigator.of(context).pushNamed('/home');
-      } else {
-        AlertDialog alertDialog = AlertDialog(
-          backgroundColor: Colors.grey.shade300,
-          content: Container(
-            decoration:
-                BoxDecoration(borderRadius: BorderRadius.circular(32.0)),
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                item.userEmail != _signin.userEmail
-                    ? const Text(
-                        'Email not match',
-                        style: TextStyle(color: Colors.red, fontSize: 20),
-                      )
-                    : const Text(
-                        "Email match Success",
-                        style: TextStyle(color: Colors.green, fontSize: 20),
-                      ),
-                item.password != _signin.password
-                    ? const Text(
-                        'Password not match',
-                        style: TextStyle(color: Colors.red, fontSize: 20),
-                      )
-                    : const Text(
-                        "Password match Success",
-                        style: TextStyle(color: Colors.green, fontSize: 20),
-                      ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(
-                  'cancel',
-                  style: TextStyle(fontSize: 22),
-                ))
-          ],
-        );
-        showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (context) {
-            return alertDialog;
-          },
-        );
-      }
-    }
+
+    Provider.of<Authentication>(context, listen: false).signIn(
+      _signInData['email'].toString(),
+      _signInData['password'].toString(),
+    );
+
+    // final signinProvider =
+    //     Provider.of<UserProvider>(context, listen: false).users;
+    // for (var item in signinProvider) {
+    //   // if (item.userEmail == _signin.userEmail &&
+    //   //     item.password == _signin.password)
+    //   try
+    //       {
+    //     Navigator.of(context).pushNamed('/home');
+    //   } catch(error) {
+    //     AlertDialog alertDialog = AlertDialog(
+    //       backgroundColor: Colors.grey.shade300,
+    //       content: Container(
+    //         decoration:
+    //             BoxDecoration(borderRadius: BorderRadius.circular(32.0)),
+    //         height: 100,
+    //         child: Column(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             item.userEmail != _signin.userEmail
+    //                 ? const Text(
+    //                     'Email not match',
+    //                     style: TextStyle(color: Colors.red, fontSize: 20),
+    //                   )
+    //                 : const Text(
+    //                     "Email match Success",
+    //                     style: TextStyle(color: Colors.green, fontSize: 20),
+    //                   ),
+    //             item.password != _signin.password
+    //                 ? const Text(
+    //                     'Password not match',
+    //                     style: TextStyle(color: Colors.red, fontSize: 20),
+    //                   )
+    //                 : const Text(
+    //                     "Password match Success",
+    //                     style: TextStyle(color: Colors.green, fontSize: 20),
+    //                   ),
+    //           ],
+    //         ),
+    //       ),
+    //       actions: [
+    //         TextButton(
+    //             onPressed: () {
+    //               Navigator.of(context).pop();
+    //             },
+    //             child: Text(
+    //               'cancel',
+    //               style: TextStyle(fontSize: 22),
+    //             ))
+    //       ],
+    //     );
+    //     showDialog(
+    //       barrierDismissible: false,
+    //       context: context,
+    //       builder: (context) {
+    //         return alertDialog;
+    //       },
+    //     );
+    //   }
+    // }
   }
 
   @override
@@ -139,10 +153,11 @@ class _SignInState extends State<SignIn> {
                                 return null;
                               },
                               onSaved: (newValue) {
-                                _signin = SignUp(
-                                  password: _signin.password,
-                                  userEmail: newValue.toString(),
-                                );
+                                // _signin = SignUp(
+                                //   password: _signin.password,
+                                //   userEmail: newValue.toString(),
+                                // );
+                                _signInData['email'] = newValue.toString();
                               },
                             ),
                             SizedBox(
@@ -178,10 +193,11 @@ class _SignInState extends State<SignIn> {
                                 return null;
                               },
                               onSaved: (newValue) {
-                                _signin = SignUp(
-                                  password: newValue.toString(),
-                                  userEmail: _signin.userEmail,
-                                );
+                                // _signin = SignUp(
+                                //   password: newValue.toString(),
+                                //   userEmail: _signin.userEmail,
+                                // );
+                                _signInData['password'] = newValue.toString();
                               },
                             ),
                             Container(
@@ -208,7 +224,7 @@ class _SignInState extends State<SignIn> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0)),
                               ),
-                              onPressed: _saveSignIn,
+                              onPressed: saveSignIn,
                               child: Text(
                                 'Log-in',
                                 textAlign: TextAlign.center,

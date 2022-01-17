@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_app/models/authentication.dart';
 import 'package:hotel_app/widgets/suggesiton/complains.dart';
 import './app_drawer.dart';
 import './data/room_data.dart';
@@ -24,30 +25,33 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: Authentication()),
         ChangeNotifierProvider.value(value: UserProvider()),
         ChangeNotifierProvider.value(value: RoomProvider()),
         ChangeNotifierProvider.value(value: CheckOutProvider())
       ],
-      child: MaterialApp(
-        //home: MyApp(),
-        //home: SignUpMainPage(),
-        //home: DetailsMainPage(),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const FirstPage(),
-          '/home': (context) => MyApp(),
-          '/profile': (context) => Profile(),
-          '/sign-up': (context) => const SignUpMainPage(),
-          '/log-in': (context) => const SignIn(),
-          '/details': (context) => const DetailsMainPage(),
-          '/selected': (context) => const Selected(),
-          '/rooms': (context) => Rooms(),
-          '/selected-rooms': (context) => const RoomsPage(),
-          '/checkout': (context) => const CheckOutMain(),
-          '/complains': (context) => const Complain(),
-          '/suggestions': (context) => const Suggestion()
-        },
-        debugShowCheckedModeBanner: false,
+      child: Consumer<Authentication>(
+        builder: (context, auth, _) => MaterialApp(
+          home: auth.isAuth ? MyApp() : SignIn(),
+          //home: Rooms(),
+          //home: DetailsMainPage(),
+          //initialRoute: auth.isAuth ? '/home' : '/',
+          routes: {
+            // '/': (context) => const FirstPage(),
+            // '/home': (context) => MyApp(),
+            '/profile': (context) => Profile(),
+            '/sign-up': (context) => const SignUpMainPage(),
+            '/log-in': (context) => const SignIn(),
+            '/details': (context) => const DetailsMainPage(),
+            '/selected': (context) => const Selected(),
+            '/rooms': (context) => Rooms(),
+            '/selected-rooms': (context) => const RoomsPage(),
+            '/checkout': (context) => const CheckOutMain(),
+            '/complains': (context) => const Complain(),
+            '/suggestions': (context) => const Suggestion()
+          },
+          debugShowCheckedModeBanner: false,
+        ),
       ),
     ),
   );

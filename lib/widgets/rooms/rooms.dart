@@ -14,6 +14,24 @@ class Rooms extends StatefulWidget {
 
 class _RoomsState extends State<Rooms> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  var _isInit = true;
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   Provider.of<RoomProvider>(context).fetchData();
+  //   super.initState();
+  // }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+
+    if (_isInit) {
+      Provider.of<RoomProvider>(context).fetchData();
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +69,7 @@ class _RoomsState extends State<Rooms> {
                   roomId: room.roomId,
                   roomTitle: room.title,
                   roomsize: room.size.round(),
-                  imgaeUrl: room.imageList[0],
+                  imgaeUrl: room.imageList[0]['stringValue'],
                 );
               }),
             ],

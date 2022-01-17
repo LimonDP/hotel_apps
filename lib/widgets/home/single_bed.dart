@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:hotel_app/data/room_class.dart';
-import 'package:hotel_app/data/room_data.dart';
-import '/widgets/rooms/room_card.dart';
 
-import 'package:provider/provider.dart';
+import 'package:hotel_app/data/room_class.dart';
+
+import '/widgets/rooms/room_card.dart';
 
 class SingleBed extends StatefulWidget {
   final Iterable<Room> selectedRoom;
@@ -35,7 +31,7 @@ class _SingleBedState extends State<SingleBed> {
             roomId: room.roomId,
             roomTitle: room.title,
             roomsize: room.size.round(),
-            imgaeUrl: room.imageList[0],
+            imgaeUrl: room.imageList[0]['stringValue'],
           );
         }).toList(),
       ],
