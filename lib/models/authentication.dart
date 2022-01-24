@@ -135,4 +135,24 @@ class Authentication with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Iterable<dynamic> _user = [];
+  Future<void> userDetails() async {
+    const url =
+        'https://firestore.googleapis.com/v1/projects/hotel-app-bd91c/databases/(default)/documents/users';
+    final response = await http.get(Uri.parse(url));
+    final responseData = jsonDecode(response.body);
+
+    final _userList = [];
+    for (var item in responseData['documents']) {
+      _userList.add(item['fields']);
+    }
+    _user = _userList
+        .where((element) => element['userId']['stringValue'] == _userId);
+    print(user.first['userName']['stringValue']);
+
+    //notifyListeners();
+  }
+
+  Iterable<dynamic> get user => _user;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_app/models/authentication.dart';
 import '/app_drawer.dart';
 import '/data/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +10,9 @@ class Profile extends StatelessWidget {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    final _userdata = Provider.of<UserProvider>(context).users;
-    print(_userdata.first.userName);
+    //final _userdata = Provider.of<UserProvider>(context).users;
+    final _userdata = Provider.of<Authentication>(context).user;
+    print(_userdata.first['userName']['stringValue']);
     return Scaffold(
       key: _scaffoldKey,
       body: CustomScrollView(
@@ -68,7 +70,8 @@ class Profile extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              _userdata.first.userName.toString().toUpperCase(),
+                              _userdata.first['userName']['stringValue'] ??
+                                  null,
                               style: TextStyle(
                                 fontSize: 19,
                               ),
@@ -112,7 +115,7 @@ class Profile extends StatelessWidget {
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        'Name     : ${_userdata.first.userName.toString().toUpperCase()}',
+                                        'Name     : ',
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),
@@ -123,7 +126,7 @@ class Profile extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           Text(
-                                            'Age         : ${_userdata.first.age.toString().toUpperCase()}',
+                                            'Age         : ',
                                             style: TextStyle(
                                               fontSize: 16,
                                             ),
@@ -220,7 +223,7 @@ class Profile extends StatelessWidget {
                                     Container(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        'Mail : ${_userdata.first.userEmail.toString()}',
+                                        'Mail : ',
                                         style: TextStyle(
                                           fontSize: 16,
                                         ),

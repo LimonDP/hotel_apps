@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_app/data/room_class.dart';
 import 'package:hotel_app/data/room_data.dart';
+import 'package:hotel_app/models/authentication.dart';
 
 import 'package:hotel_app/widgets/selected/selected.dart';
 import 'package:provider/provider.dart';
@@ -43,6 +44,8 @@ class HomeMainPage extends StatelessWidget {
         _singlebeds.where((element) => element.bed == 'Double Bed');
 
     final _bedData = Provider.of<RoomProvider>(context).fetchBed();
+    final _user = Provider.of<Authentication>(context).userDetails();
+    print(_user);
     //print(_bedData);
     return Column(
       //shrinkWrap: true,
