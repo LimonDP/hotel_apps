@@ -69,8 +69,8 @@ class _CheckOutMainState extends State<CheckOutMain> {
     });
     final _getbed = Provider.of<RoomProvider>(context)
         .bedList
-        .where((element) => element['name'] == _bed);
-    _total.add(_getbed.first['price']);
+        .where((element) => element.name == _bed);
+    _total.add(_getbed.first.price);
 
     final _getwindow = Provider.of<RoomProvider>(context)
         .windowsList
@@ -140,7 +140,7 @@ class _CheckOutMainState extends State<CheckOutMain> {
                             ),
                             width: MediaQuery.of(context).size.width / 1.7,
                             child: Text(
-                              _getbed.first['name'],
+                              _getbed.first.name,
                               style: TextStyle(fontSize: 18.0),
                             ),
                           ),
@@ -157,7 +157,7 @@ class _CheckOutMainState extends State<CheckOutMain> {
                             alignment: Alignment.center,
                             width: MediaQuery.of(context).size.width / 3,
                             child: Text(
-                              _getbed.first['price'].toString(),
+                              _getbed.first.price.toString(),
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

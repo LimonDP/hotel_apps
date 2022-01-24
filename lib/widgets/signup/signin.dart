@@ -42,6 +42,7 @@ class _SignInState extends State<SignIn> {
       _signInData['email'].toString(),
       _signInData['password'].toString(),
     );
+    //await Provider.of<Authentication>(context, listen: false).userCollection();
 
     // final signinProvider =
     //     Provider.of<UserProvider>(context, listen: false).users;
@@ -106,6 +107,8 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    final res = Provider.of<Authentication>(context).isAuth;
+    print(res);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -253,7 +256,7 @@ class _SignInState extends State<SignIn> {
                                 //backgroundColor: Color(0xFFb57322),
                                 ),
                             onPressed: () {
-                              Navigator.of(context).pop();
+                              Navigator.of(context).pushNamed('/sign-up');
                             },
                             child: Row(
                               children: const [

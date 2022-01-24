@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:hotel_app/data/room_class.dart';
-
 import '/widgets/rooms/room_card.dart';
 
 class SingleBed extends StatefulWidget {

@@ -41,6 +41,9 @@ class HomeMainPage extends StatelessWidget {
         _singlebeds.where((element) => element.bed == 'Single Bed');
     final _dataList1 =
         _singlebeds.where((element) => element.bed == 'Double Bed');
+
+    final _bedData = Provider.of<RoomProvider>(context).fetchBed();
+    //print(_bedData);
     return Column(
       //shrinkWrap: true,
       crossAxisAlignment: CrossAxisAlignment.stretch,

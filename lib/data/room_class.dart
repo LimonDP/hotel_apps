@@ -43,3 +43,9 @@ class SelectedData {
       this.detailsRoomId,
       this.roomId});
 }
+
+class Bed {
+  final String name;
+  final double price;
+  Bed({required this.name, required this.price});
+}

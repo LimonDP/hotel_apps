@@ -32,16 +32,22 @@ void main() {
       ],
       child: Consumer<Authentication>(
         builder: (context, auth, _) => MaterialApp(
-          home: auth.isAuth ? MyApp() : SignIn(),
+          home: auth.isAuth
+              ? const MyApp()
+              : FutureBuilder(
+                  builder: (context, authSnapshot) =>
+                      authSnapshot.connectionState == ConnectionState.waiting
+                          ? const FirstPage()
+                          : const SignIn()),
           //home: Rooms(),
           //home: DetailsMainPage(),
           //initialRoute: auth.isAuth ? '/home' : '/',
           routes: {
-            // '/': (context) => const FirstPage(),
+            //'/firstPage': (context) => const FirstPage(),
             // '/home': (context) => MyApp(),
             '/profile': (context) => Profile(),
             '/sign-up': (context) => const SignUpMainPage(),
-            '/log-in': (context) => const SignIn(),
+            // '/log-in': (context) => const SignIn(),
             '/details': (context) => const DetailsMainPage(),
             '/selected': (context) => const Selected(),
             '/rooms': (context) => Rooms(),
@@ -58,6 +64,8 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   State<MyApp> createState() => _MyAppState();
 }

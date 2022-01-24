@@ -1,28 +1,27 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:hotel_app/data/room_class.dart';
 import 'package:http/http.dart' as http;
 
 class RoomProvider with ChangeNotifier {
-  List<Map> bedList = [
-    {
-      'name': 'Single Bed',
-      'price': 300.0,
-    },
-    {
-      'name': 'Double Bed',
-      'price': 450.0,
-    },
-    {
-      'name': 'Three Beds',
-      'price': 575.0,
-    },
-    {
-      'name': 'Duplex Bed',
-      'price': 600.0,
-    },
+  List<Bed> bedList = [
+    // {
+    //   'name': 'Single Bed',
+    //   'price': 300.0,
+    // },
+    // {
+    //   'name': 'Double Bed',
+    //   'price': 450.0,
+    // },
+    // {
+    //   'name': 'Three Beds',
+    //   'price': 575.0,
+    // },
+    // {
+    //   'name': 'Duplex Bed',
+    //   'price': 600.0,
+    // },
   ];
   List<Map> windowsList = [
     {
@@ -752,5 +751,25 @@ class RoomProvider with ChangeNotifier {
       print(error);
     }
     notifyListeners();
+  }
+
+  Future<void> fetchBed() async {
+    const url =
+        'https://firestore.googleapis.com/v1/projects/hotel-app-bd91c/databases/(default)/documents/beds';
+
+    final response = await http.get(Uri.parse(url));
+    final responsedata = json.decode(response.body) as Map<String, dynamic>;
+    List _getdata = [];
+    for (var item in responsedata['documents']) {
+      _getdata.add(item['fields']);
+    }
+    List<Bed> _bed = [];
+    _getdata.forEach((bedData) {
+      _bed.add(Bed(
+          name: bedData['name']['stringValue'],
+          price: double.parse(bedData['price']['stringValue'].toString())));
+    });
+    bedList = _bed;
+    //print(_getdata);
   }
 }

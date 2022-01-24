@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hotel_app/data/signup.dart';
 import 'package:hotel_app/data/user_provider.dart';
 import 'package:hotel_app/models/authentication.dart';
+import 'package:hotel_app/widgets/signup/signin.dart';
 import 'package:provider/provider.dart';
 
 class SignUpMainPage extends StatefulWidget {
@@ -41,6 +42,7 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
         _AuthenticationData['email'].toString(),
         _AuthenticationData['password'].toString(),
       );
+
       Navigator.of(context).pushNamed('/log-in');
     }
   }
@@ -304,7 +306,9 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
                           Text('Already have an Account.'),
                           TextButton(
                               onPressed: () {
-                                Navigator.of(context).pushNamed('/log-in');
+                                // Navigator.of(context).pushNamed('/log-in');
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => SignIn()));
                               },
                               child: Row(
                                 children: [

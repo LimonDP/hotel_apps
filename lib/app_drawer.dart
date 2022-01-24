@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_app/models/authentication.dart';
+import 'package:hotel_app/widgets/first_page.dart';
+import 'package:provider/provider.dart';
 
 import 'home_menu_button.dart';
 
@@ -65,6 +68,14 @@ class AppDrawer extends StatelessWidget {
               menuIcon: Icon(Icons.comment_outlined),
               route: '/suggestions',
             ),
+            ElevatedButton(
+                onPressed: () {
+                  // Navigator.of(context).pushNamed('/firstPage');
+                  Provider.of<Authentication>(context, listen: false).logout();
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => FirstPage()));
+                },
+                child: Text('Log-out'))
             // HomeMuenuButton(
             //   textVAlue: 'Exit App',
             //   menuIcon: Icon(Icons.exit_to_app),
