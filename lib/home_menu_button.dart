@@ -4,8 +4,13 @@ class HomeMuenuButton extends StatelessWidget {
   final String textVAlue;
   final Icon menuIcon;
   final String? route;
-  HomeMuenuButton(
-      {Key? key, required this.textVAlue, required this.menuIcon, this.route});
+
+  HomeMuenuButton({
+    Key? key,
+    required this.textVAlue,
+    required this.menuIcon,
+    this.route,
+  });
 
   @override
   Widget build(BuildContext context) {

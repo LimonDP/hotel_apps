@@ -22,16 +22,16 @@ class _RoomsState extends State<Rooms> {
   //   super.initState();
   // }
 
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
+  // @override
+  // void didChangeDependencies() {
+  //   // TODO: implement didChangeDependencies
 
-    if (_isInit) {
-      Provider.of<RoomProvider>(context).fetchData();
-    }
-    _isInit = false;
-    super.didChangeDependencies();
-  }
+  //   if (_isInit) {
+  //     Provider.of<RoomProvider>(context).fetchData();
+  //   }
+  //   _isInit = false;
+  //   super.didChangeDependencies();
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -128,7 +128,28 @@ class Authentication with ChangeNotifier {
           'fields': {
             'userId': {
               "stringValue": _userId,
-            }
+            },
+            'userName': {
+              "stringValue": '',
+            },
+            'phone': {
+              "stringValue": '',
+            },
+            'blood': {
+              "stringValue": '',
+            },
+            'gender': {
+              "stringValue": '',
+            },
+            'nidId': {
+              "stringValue": '',
+            },
+            'localAddress': {
+              "stringValue": '',
+            },
+            'presentAddress': {
+              "stringValue": '',
+            },
           }
         }),
       );
@@ -149,7 +170,6 @@ class Authentication with ChangeNotifier {
     }
     _user = _userList
         .where((element) => element['userId']['stringValue'] == _userId);
-    print(user.first['userName']['stringValue']);
 
     //notifyListeners();
   }

@@ -6,6 +6,8 @@ import 'package:hotel_app/data/signup.dart';
 import 'package:hotel_app/models/authentication.dart';
 import 'package:provider/provider.dart';
 
+import 'signup_main.dart';
+
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
@@ -256,7 +258,9 @@ class _SignInState extends State<SignIn> {
                                 //backgroundColor: Color(0xFFb57322),
                                 ),
                             onPressed: () {
-                              Navigator.of(context).pushNamed('/sign-up');
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => SignUpMainPage()));
+                              //Navigator.of(context).pushNamed('/sign-up');
                             },
                             child: Row(
                               children: const [

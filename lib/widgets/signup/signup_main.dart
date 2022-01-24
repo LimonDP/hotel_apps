@@ -43,7 +43,9 @@ class _SignUpMainPageState extends State<SignUpMainPage> {
         _AuthenticationData['password'].toString(),
       );
 
-      Navigator.of(context).pushNamed('/log-in');
+      // Navigator.of(context).pushNamed('/log-in');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => SignIn()));
     }
   }
 

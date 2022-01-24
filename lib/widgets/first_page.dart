@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_app/data/signup.dart';
+import 'package:hotel_app/widgets/signup/signup_main.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -59,7 +61,9 @@ class FirstPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/sign-up');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SignUpMainPage()));
+                    //Navigator.of(context).pushNamed('/sign-up');
                   },
                 ),
               ),

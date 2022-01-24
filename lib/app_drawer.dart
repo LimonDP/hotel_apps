@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_app/main.dart';
 import 'package:hotel_app/models/authentication.dart';
 import 'package:hotel_app/widgets/first_page.dart';
 import 'package:provider/provider.dart';
 
 import 'home_menu_button.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,10 +41,28 @@ class AppDrawer extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            HomeMuenuButton(
-              textVAlue: 'Home',
-              menuIcon: Icon(Icons.home),
-              route: '/home',
+            // HomeMuenuButton(
+            //   textVAlue: 'Home', menuIcon: Icon(Icons.home),
+            //   //route: '/home',
+            // ),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 15.0,
+                  ),
+                  alignment: Alignment.centerLeft,
+                  primary: Colors.purple.shade300),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => MyApp()));
+              },
+              icon: Icon(Icons.home),
+              label: Text(
+                'Home',
+                style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
             ),
             HomeMuenuButton(
               textVAlue: 'Rooms',
@@ -70,10 +94,11 @@ class AppDrawer extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  // Navigator.of(context).pushNamed('/firstPage');
+                  Navigator.of(context).pushNamed('/firstPage');
+                  // Navigator.of(context).push(
+                  //     MaterialPageRoute(builder: (context) => FirstPage()));
+
                   Provider.of<Authentication>(context, listen: false).logout();
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => FirstPage()));
                 },
                 child: Text('Log-out'))
             // HomeMuenuButton(
