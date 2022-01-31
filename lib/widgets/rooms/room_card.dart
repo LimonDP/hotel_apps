@@ -33,46 +33,51 @@ class _RoomCardState extends State<RoomCard> {
         child: Column(
           children: [
             Image(
-              height: 120,
+              height: 220,
               fit: BoxFit.cover,
               image: NetworkImage(widget.imgaeUrl),
             ),
-            Text(
-              widget.roomId.toString(),
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              //maxLines: 1,
+            Container(
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.only(left: 12.0),
+              child: Text(
+                widget.roomTitle.toString(),
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 16),
+                //maxLines: 1,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      setState(() {
-                        if (widget.isFavorite == true) {
-                          widget.isFavorite = false;
-                        } else {
-                          widget.isFavorite = true;
-                        }
-                      });
-                    },
-                    icon: widget.isFavorite == true
-                        ? const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.favorite_border,
-                            color: Colors.grey,
-                          )),
-                TextButton(
-                    style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(49.0))),
-                    onPressed: () {},
-                    child: const Icon(Icons.share_outlined)),
-              ],
-            )
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     IconButton(
+            //         onPressed: () {
+            //           setState(() {
+            //             if (widget.isFavorite == true) {
+            //               widget.isFavorite = false;
+            //             } else {
+            //               widget.isFavorite = true;
+            //             }
+            //           });
+            //         },
+            //         icon: widget.isFavorite == true
+            //             ? const Icon(
+            //                 Icons.favorite,
+            //                 color: Colors.red,
+            //               )
+            //             : const Icon(
+            //                 Icons.favorite_border,
+            //                 color: Colors.grey,
+            //               )),
+            //     TextButton(
+            //         style: TextButton.styleFrom(
+            //             shape: RoundedRectangleBorder(
+            //                 borderRadius: BorderRadius.circular(49.0))),
+            //         onPressed: () {},
+            //         child: const Icon(Icons.share_outlined)),
+            //   ],
+            // )
           ],
         ),
       ),

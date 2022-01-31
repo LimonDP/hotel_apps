@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 class Room {
   final String roomId;
   final String bed;
@@ -34,14 +36,21 @@ class SelectedData {
   final String? bed;
   final String? detailsRoomId;
   final String? roomId;
-  SelectedData(
-      {this.listname,
-      this.selectName,
-      this.service,
-      this.bed,
-      this.window,
-      this.detailsRoomId,
-      this.roomId});
+  final double? charge;
+  final int? days;
+  final String? amount;
+  SelectedData({
+    this.listname,
+    this.selectName,
+    this.service,
+    this.bed,
+    this.window,
+    this.detailsRoomId,
+    this.roomId,
+    this.amount,
+    this.charge,
+    this.days,
+  });
 }
 
 class Bed {

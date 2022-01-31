@@ -63,6 +63,7 @@ class _RoomsState extends State<Rooms> {
           ),
           SliverGrid.count(
             crossAxisCount: 2,
+            childAspectRatio: 2 / 2.5,
             children: [
               ..._allRoom.map((room) {
                 return RoomCard(

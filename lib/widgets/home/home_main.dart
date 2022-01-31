@@ -15,23 +15,23 @@ class HomeMainPage extends StatelessWidget {
   List itemList = [
     {
       'textValue': 'Freedom Fighter 40% Discount',
-      'backgroundColor': Colors.green.shade500,
+      'image': 'assets/images/image1.jpg',
     },
     {
       'textValue': 'Friday Deals 5% Discount',
-      'backgroundColor': Colors.orange.shade500,
+      'image': 'assets/images/image2.jpg',
     },
     {
       'textValue': ' Regular Customer 15% Discount',
-      'backgroundColor': Colors.cyan.shade500,
+      'image': 'assets/images/image3.jpg',
     },
     {
       'textValue': 'Monthly OnSale 10% Discount',
-      'backgroundColor': Colors.pink.shade500,
+      'image': 'assets/images/wellcome.jpg',
     },
     {
       'textValue': 'Student 20% Discount',
-      'backgroundColor': Colors.red.shade500,
+      'image': 'assets/images/image2.jpg',
     }
   ];
   @override
@@ -45,7 +45,7 @@ class HomeMainPage extends StatelessWidget {
 
     final _bedData = Provider.of<RoomProvider>(context).fetchBed();
     final _user = Provider.of<Authentication>(context).userDetails();
-    print(_user);
+    // print(_user);
     //print(_bedData);
     return Column(
       //shrinkWrap: true,
@@ -67,7 +67,9 @@ class HomeMainPage extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
                         decoration: BoxDecoration(
-                          color: i['backgroundColor'],
+                          //color: i['backgroundColor'],
+                          image: DecorationImage(
+                              fit: BoxFit.cover, image: AssetImage(i['image'])),
                           borderRadius: BorderRadius.circular(16.0),
                         ),
                         child: Center(
@@ -76,7 +78,7 @@ class HomeMainPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 38.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.orange.shade100),
+                                color: Colors.white),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -223,7 +225,7 @@ class HomeMainPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.all(10.0),
+                margin: EdgeInsets.fromLTRB(10, 10, 10, 00),
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(vertical: 16.0),
                 decoration: BoxDecoration(
@@ -240,14 +242,11 @@ class HomeMainPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
               SingleBed(
                 selectedRoom: _dataList,
               ),
               Container(
-                margin: EdgeInsets.all(10.0),
+                margin: EdgeInsets.fromLTRB(10, 10, 10, 00),
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(vertical: 16.0),
                 decoration: BoxDecoration(
@@ -263,9 +262,6 @@ class HomeMainPage extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-              ),
-              SizedBox(
-                height: 10,
               ),
               SingleBed(
                 selectedRoom: _dataList1,

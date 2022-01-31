@@ -9,6 +9,7 @@ class Authentication with ChangeNotifier {
   DateTime? _expiresIn;
   String? _userId;
   Timer? _authTimer;
+  get userId => _userId;
   Future<void> signUp(String email, String password) async {
     const url =
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCCrLw9fYF-47TTXGoTRiR68HWDeIOOyNI';
@@ -50,7 +51,7 @@ class Authentication with ChangeNotifier {
     });
     prefs.setString('userData', userData);
 
-    userCollection();
+    userCollection(email);
     notifyListeners();
   }
 
@@ -104,7 +105,7 @@ class Authentication with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> userCollection() async {
+  Future<void> userCollection(String email) async {
     const url =
         'https://firestore.googleapis.com/v1/projects/hotel-app-bd91c/databases/(default)/documents/users';
 
@@ -150,6 +151,9 @@ class Authentication with ChangeNotifier {
             'presentAddress': {
               "stringValue": '',
             },
+            'email': {
+              "stringValue": email,
+            },
           }
         }),
       );
@@ -170,8 +174,6 @@ class Authentication with ChangeNotifier {
     }
     _user = _userList
         .where((element) => element['userId']['stringValue'] == _userId);
-
-    //notifyListeners();
   }
 
   Iterable<dynamic> get user => _user;

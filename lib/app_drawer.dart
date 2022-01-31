@@ -92,19 +92,19 @@ class _AppDrawerState extends State<AppDrawer> {
               menuIcon: Icon(Icons.comment_outlined),
               route: '/suggestions',
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/firstPage');
-                  // Navigator.of(context).push(
-                  //     MaterialPageRoute(builder: (context) => FirstPage()));
+            // ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.of(context).pushNamed('/firstPage');
+            //       // Navigator.of(context).push(
+            //       //     MaterialPageRoute(builder: (context) => FirstPage()));
 
-                  Provider.of<Authentication>(context, listen: false).logout();
-                },
-                child: Text('Log-out'))
-            // HomeMuenuButton(
-            //   textVAlue: 'Exit App',
-            //   menuIcon: Icon(Icons.exit_to_app),
-            // ),
+            //       Provider.of<Authentication>(context, listen: false).logout();
+            //     },
+            //     child: Text('Log-out'))
+            HomeMuenuButton(
+              textVAlue: 'Exit App',
+              menuIcon: Icon(Icons.exit_to_app),
+            ),
           ],
         ),
       ),

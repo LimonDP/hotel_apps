@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_app/data/room_class.dart';
 import 'package:hotel_app/data/room_data.dart';
+import 'package:hotel_app/models/booking.dart';
+import 'package:hotel_app/widgets/booking_details/booking_details.dart';
 import 'package:hotel_app/widgets/checkout/checkout_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -97,15 +99,17 @@ class _CheckOutMainState extends State<CheckOutMain> {
 
     double _totalPrice = _total.reduce((a, b) => a + b);
     double total = 0.0;
+    int _day = 0;
     if (_addOut.isNotEmpty) {
       final int days = _addOut[1].difference(_addOut[0]).inDays;
-
+      _day += days;
       total += days.toDouble() * _totalPrice;
     }
-
+    double _totals = total;
+    //print(_getbed.first.name);
     return Scaffold(
       appBar: AppBar(
-        title: Text('CheckOut'),
+        title: Text('Total Charge'),
       ),
       body: SingleChildScrollView(
         primary: true,
@@ -370,56 +374,58 @@ class _CheckOutMainState extends State<CheckOutMain> {
                     const SizedBox(
                       height: 4,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.amber.shade700,
-                      ),
-                      child: Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(16.0),
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                right: BorderSide(
-                                  width: 2.0,
-                                  color: Colors.white,
+                    _getac.first['name'] != 'No'
+                        ? Container(
+                            decoration: BoxDecoration(
+                              color: Colors.amber.shade700,
+                            ),
+                            child: Row(
+                              //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      right: BorderSide(
+                                        width: 2.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.7,
+                                  child: Text(
+                                    "Ac ${_getac.first['name']}",
+                                    style: TextStyle(fontSize: 18.0),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            width: MediaQuery.of(context).size.width / 1.7,
-                            child: Text(
-                              "Ac ${_getac.first['name']}",
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(16.0),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  width: 2.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: Text(
-                              _getac.first['price'].toString(),
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      left: BorderSide(
+                                        width: 2.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  alignment: Alignment.center,
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  child: Text(
+                                    _getac.first['price'].toString(),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
+                        : const SizedBox(
+                            //: 4,
+                            ),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -709,22 +715,47 @@ class _CheckOutMainState extends State<CheckOutMain> {
               ),
               Container(
                 alignment: Alignment.centerRight,
-                margin: const EdgeInsets.only(right: 20.0),
+                //margin: const EdgeInsets.only(right: 20.0),
                 //width: 80,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(140, 50),
+                      fixedSize: Size(MediaQuery.of(context).size.width, 60),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.0),
                       ),
                     ),
                     child: const Text(
-                      'PAY',
+                      'CHACKOUT',
                       textAlign: TextAlign.center,
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => BookingDetails()));
+                      Navigator.of(context).pushNamed(
+                        '/booking-details',
+                        arguments:
+                            // SelectedData(
+                            //     roomId: _args.roomId,
+                            //     charge: _totalPrice,
+                            //     amount: total.toString(),
+                            //     days: _day),
+                            Booking(
+                                roomId: _args.roomId,
+                                charge: _totalPrice,
+                                amount: total,
+                                days: _day,
+                                bed: _getbed,
+                                window: _getwindow,
+                                ac: _getac,
+                                table: _gettable,
+                                floor: _getfloor,
+                                balcony: _getbalcony,
+                                inDate: _addOut[0],
+                                outDate: _addOut[1]),
+                      );
+                    }),
               )
             ],
           ),

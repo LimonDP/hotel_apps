@@ -23,6 +23,7 @@ class _SingleBedState extends State<SingleBed> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
+      childAspectRatio: 2 / 2.5,
       children: [
         ...widget.selectedRoom.map((room) {
           return RoomCard(

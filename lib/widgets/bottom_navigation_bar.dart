@@ -55,9 +55,11 @@ class OneTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(fixedSize: const Size.fromHeight(60)),
-      onPressed: () {
-        Navigator.of(context).pushNamed(routeName!);
-      },
+      onPressed: routeName != null
+          ? () {
+              Navigator.of(context).pushNamed(routeName!);
+            }
+          : () {},
       child: Column(
         children: [
           buttonIcon,
